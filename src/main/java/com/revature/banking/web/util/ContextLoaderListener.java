@@ -39,6 +39,7 @@ public class ContextLoaderListener implements ServletContextListener {
         } catch (SQLException | URISyntaxException e) {
             e.printStackTrace();
         }
+        
 
         AppUserDAO userDAO = new AppUserDAO();
         UserService userService = new UserService(userDAO, crudORM);
