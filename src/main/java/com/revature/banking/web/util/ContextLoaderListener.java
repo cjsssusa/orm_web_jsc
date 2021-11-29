@@ -31,15 +31,14 @@ public class ContextLoaderListener implements ServletContextListener {
         System.out.println("Initializing application");
 
         ObjectMapper objectMapper = new ObjectMapper();
-
         CrudORM crudORM = new CrudORM(this);
+
         try {
             crudORM.createAllOfTablesWithDataSourceORM(this.getClass());
             System.out.println("Done createAllOfTablesWithDataSourceORM");
         } catch (SQLException | URISyntaxException e) {
             e.printStackTrace();
         }
-        
 
         AppUserDAO userDAO = new AppUserDAO();
         UserService userService = new UserService(userDAO, crudORM);
@@ -48,7 +47,7 @@ public class ContextLoaderListener implements ServletContextListener {
         FlashcardService cardService = new FlashcardService(cardDAO);
 
         BankDAO bankDAO = new BankDAO();
-        BankService bankService = new BankService(bankDAO,userService, crudORM);
+        BankService bankService = new BankService(bankDAO, userService, crudORM);
 
         FlashcardServlet cardServlet = new FlashcardServlet(cardService, objectMapper);
         UserServlet userServlet = new UserServlet(userService, objectMapper);

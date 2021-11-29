@@ -42,13 +42,14 @@ public class BankServlet extends HttpServlet {
             boolean wasRegistered = false;
             BankAccount bankAccount = mapper.readValue(req.getInputStream(), BankAccount.class);
             System.out.println(bankAccount);;
+
             if (req.getParameter("type").equals("create")) {
                 bankAccount.setCreator_id(authUser.getUser_id());
                 System.out.println(bankAccount.toString());
                 wasRegistered = bankService.openBankAccount(bankAccount);
+
             } else if (req.getParameter("type").equals("update")) {
                 String update_column = req.getParameter("col");
-
                 System.out.println("col = " + req.getParameter("col"));
 
                 Map<String, Map<String, String>> whereOderBy = new HashMap<>();
