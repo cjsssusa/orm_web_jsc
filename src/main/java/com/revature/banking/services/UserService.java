@@ -23,17 +23,14 @@ public class UserService {
     }
 
     public boolean registerNewUser(AppUser newUser) {
-
         if (!isUserValid(newUser)) {
             throw new InvalidRequestException("Invalid user data provided!");
         }
         // username
         Map<String, Map<String, String>> whereOderBy = new HashMap<>();
-
         Map<String, String> where = new HashMap<>();
         where.put("username", newUser.getUsername());
         whereOderBy.put("where", where);
-
         boolean usernameAvailable = true;
         List<AppUser> appUserList = crudORM.readTable(newUser, whereOderBy, AppUser.class);
         for (AppUser appUser : appUserList) {
@@ -43,11 +40,9 @@ public class UserService {
         }
         // email
         whereOderBy = new HashMap<>();
-
         where = new HashMap<>();
         where.put("email", newUser.getEmail());
         whereOderBy.put("where", where);
-
         boolean emailAvailable = true;
         appUserList = crudORM.readTable(newUser, whereOderBy, AppUser.class);
         for (AppUser appUserORM : appUserList) {
@@ -55,7 +50,6 @@ public class UserService {
             emailAvailable = false;
             break;
         }
-
         // ---
         if (!usernameAvailable || !emailAvailable) {
             String msg = "The values provided for the following fields are already taken by other users:";
@@ -63,18 +57,13 @@ public class UserService {
             if (!emailAvailable) msg = msg + "\n\t- email";
             throw new ResourcePersistenceException(msg);
         }
-
-//        AppUser registeredUser = userDAO.save(newUser);
-
+        // ---
         newUser.setUser_id(UUID.randomUUID().toString());
         AppUser registeredUser = crudORM.insertTable(newUser);
-
         if (registeredUser == null) {
             throw new ResourcePersistenceException("The user could not be persisted to the datasource!");
         }
-
         return true;
-
     }
 
     public AppUser authenticateUser(String username, String password) {
