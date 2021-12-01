@@ -58,6 +58,8 @@
             <groupId>com.revature</groupId>
             <artifactId>orm-dario-jongsoo</artifactId>
             <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/orm_dario_jongsoo_p1.jar</systemPath>
         </dependency>
     </dependencies>
     <build>
