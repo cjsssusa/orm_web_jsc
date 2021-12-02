@@ -58,7 +58,6 @@
             <groupId>com.revature</groupId>
             <artifactId>orm-dario-jongsoo</artifactId>
             <version>1.0.0</version>
-            <scope>system</scope>
         </dependency>
     </dependencies>
     <build>
@@ -132,11 +131,16 @@
                 </executions>
             </plugin>
             <plugin>
-<!-- https://maven.apache.org/plugins/maven-war-plugin/examples/including-excluding-files-from-war.html-->
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>2.2</version>
                 <configuration>
-                    <packagingIncludes>WEB-INF/lib/*.jar</packagingIncludes>
+                    <warSourceDirectory>WebContent</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
