@@ -130,6 +130,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+<!-- https://maven.apache.org/plugins/maven-war-plugin/examples/including-excluding-files-from-war.html-->
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <packagingIncludes>WEB-INF/lib/*.jar</packagingIncludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
