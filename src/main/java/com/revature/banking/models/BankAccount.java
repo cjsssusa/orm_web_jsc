@@ -61,6 +61,18 @@ public class BankAccount {
         return account_type;
     }
 
+    public String getAccount_number() {
+        return account_number;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public String getCreator_id() {
+        return creator_id;
+    }
+
     public void setCreator_id(String creator_id) {
         this.creator_id = creator_id;
     }

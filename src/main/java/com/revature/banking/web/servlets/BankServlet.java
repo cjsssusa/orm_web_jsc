@@ -64,6 +64,7 @@ public class BankServlet extends HttpServlet {
                 System.out.println(whereOderBy);
 
                 wasRegistered = bankService.update(bankAccount, whereOderBy);
+
             } else if (req.getParameter("type").equals("delete")) {
                 Map<String, Map<String, String>> whereOderBy = new HashMap<>();
 
