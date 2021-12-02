@@ -58,7 +58,6 @@
             <groupId>com.revature</groupId>
             <artifactId>orm-dario-jongsoo</artifactId>
             <version>1.0.0</version>
-            <scope>system</scope>
         </dependency>
     </dependencies>
     <build>
