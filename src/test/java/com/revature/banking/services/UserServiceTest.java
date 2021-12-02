@@ -130,19 +130,16 @@ public class UserServiceTest {
         }
     }
 
-
+//
 //    @Test
 //    public void test_authenticateUser__returnsTrue_givenValidUsernameValidPassword() {
 //        // Arrange
 //        String ValidUsername = "valid", ValidEmail = "valid";
-//
 //        AppUser ValidUser = new AppUser("valid", "valid", "valid", "valid", "valid");
-//
 //        List<AppUser> appUserList = new ArrayList<>();
 //        appUserList.add(ValidUser);
 //
 //        Map<String, Map<String, String>> whereOderBy = new HashMap<>();
-//
 //        Map<String, String> where = new HashMap<>();
 //        where.put("username", "a");
 //        where.put("email", "a");
