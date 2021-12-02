@@ -1,6 +1,5 @@
 package com.revature.banking.services;
 
-import com.revature.banking.daos.AppUserDAO;
 import com.revature.banking.exceptions.AuthenticationException;
 import com.revature.banking.exceptions.InvalidRequestException;
 import com.revature.banking.exceptions.ResourcePersistenceException;
@@ -14,41 +13,48 @@ import java.util.UUID;
 
 public class UserService {
 
-    private final AppUserDAO userDAO;
     private final CrudORM crudORM;
 
-    public UserService(AppUserDAO userDAO, CrudORM crudORM) {
-        this.userDAO = userDAO;
+    public UserService(CrudORM crudORM) {
         this.crudORM = crudORM;
     }
 
     public boolean registerNewUser(AppUser newUser) {
+
         if (!isUserValid(newUser)) {
             throw new InvalidRequestException("Invalid user data provided!");
         }
         // username
         Map<String, Map<String, String>> whereOderBy = new HashMap<>();
+
         Map<String, String> where = new HashMap<>();
         where.put("username", newUser.getUsername());
         whereOderBy.put("where", where);
+
         boolean usernameAvailable = true;
         List<AppUser> appUserList = crudORM.readTable(newUser, whereOderBy, AppUser.class);
-        for (AppUser appUser : appUserList) {
-            System.out.println(appUser);
-            usernameAvailable = false;
-            break;
+        if (appUserList != null) {
+            for (AppUser appUser : appUserList) {
+                System.out.println(appUser);
+                usernameAvailable = false;
+                break;
+            }
         }
         // email
         whereOderBy = new HashMap<>();
+
         where = new HashMap<>();
         where.put("email", newUser.getEmail());
         whereOderBy.put("where", where);
+
         boolean emailAvailable = true;
         appUserList = crudORM.readTable(newUser, whereOderBy, AppUser.class);
-        for (AppUser appUserORM : appUserList) {
-            System.out.println(appUserORM);
-            emailAvailable = false;
-            break;
+        if (appUserList != null) {
+            for (AppUser appUserORM : appUserList) {
+                System.out.println(appUserORM);
+                emailAvailable = false;
+                break;
+            }
         }
         // ---
         if (!usernameAvailable || !emailAvailable) {
@@ -57,12 +63,13 @@ public class UserService {
             if (!emailAvailable) msg = msg + "\n\t- email";
             throw new ResourcePersistenceException(msg);
         }
-        // ---
         newUser.setUser_id(UUID.randomUUID().toString());
         AppUser registeredUser = crudORM.insertTable(newUser);
+
         if (registeredUser == null) {
             throw new ResourcePersistenceException("The user could not be persisted to the datasource!");
         }
+
         return true;
     }
 
@@ -72,14 +79,32 @@ public class UserService {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
 
-        AppUser authenticatedUser = userDAO.findUserByUsernameAndPassword(username, password);
+        AppUser authUser = new AppUser();
+        authUser.setUsername(username);
+        authUser.setPassword(password);
 
+        Map<String, Map<String, String>> whereOderBy = new HashMap<>();
+        Map<String, String> where = new HashMap<>();
+        where.put("username", username);
+        where.put("password", password);
+        whereOderBy.put("where", where);
+
+        AppUser authenticatedUser = null;
+        List<AppUser> appUserList = crudORM.readTable(authUser, whereOderBy, AppUser.class);
+        System.out.println("appUserList --- " + appUserList);
+
+        if (appUserList != null) {
+            for (AppUser appUser : appUserList) {
+                System.out.println(appUser);
+                authenticatedUser = appUser;
+                break;
+            }
+        }
         if (authenticatedUser == null) {
             throw new AuthenticationException();
         }
 
         return authenticatedUser;
-
     }
 
     public boolean isUserValid(AppUser user) {
@@ -90,5 +115,6 @@ public class UserService {
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         return user.getPassword() != null && !user.getPassword().trim().equals("");
     }
+
 
 }

@@ -37,24 +37,11 @@ public class BankAccount {
         this.account_type = accountType;
     }
 
-    public BankAccount(String account_name, String account_type, String creator_id) {
-        this.account_name = account_name;
-        this.account_type = account_type;
-        this.creator_id = creator_id;
-    }
-
     public BankAccount(String account_name, String account_number, String account_type, Double balance, String creator_id) {
         this.account_name = account_name;
         this.account_number = account_number;
         this.account_type = account_type;
         this.balance = balance;
-        this.creator_id = creator_id;
-    }
-
-    public BankAccount(String bank_account_id, String accountName, String account_number,
-                       String accountType, double balance, String creator_id) {
-        this(accountName, account_number, accountType, balance, creator_id);
-        this.bank_account_id = bank_account_id;
         this.creator_id = creator_id;
     }
 
@@ -70,36 +57,8 @@ public class BankAccount {
         return account_name;
     }
 
-    public void setAccount_name(String account_name) {
-        this.account_name = account_name;
-    }
-
-    public String getAccount_number() {
-        return account_number;
-    }
-
-    public void setAccount_number(String account_number) {
-        this.account_number = account_number;
-    }
-
     public String getAccount_type() {
         return account_type;
-    }
-
-    public void setAccount_type(String account_type) {
-        this.account_type = account_type;
-    }
-
-    public String getCreator_id() {
-        return creator_id;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public void setCreator_id(String creator_id) {
@@ -108,12 +67,6 @@ public class BankAccount {
 
     public LocalDateTime getDate_added() {
         return date_added;
-    }
-
-    public void setDate_added(String date_added) {
-        System.out.println(date_added);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSS");
-        this.date_added = LocalDateTime.parse(date_added, formatter);
     }
 
     @Override

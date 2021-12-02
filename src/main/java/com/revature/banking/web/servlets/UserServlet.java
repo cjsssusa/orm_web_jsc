@@ -25,7 +25,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("Beginning of doPost..... in UserServlet");
+        System.out.println("beginning of doPost..... cjs");
 
         PrintWriter respWriter = resp.getWriter();
         resp.setContentType("application/json");

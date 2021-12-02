@@ -59,11 +59,6 @@ public class AppUser {
         this.password = password;
     }
 
-    public AppUser(String id, String firstName, String lastName, String email, String username, String password) {
-        this(firstName, lastName, email, username, password);
-        this.user_id = id;
-    }
-
     public AppUser() {
         super();
     }
@@ -125,43 +120,5 @@ public class AppUser {
         System.out.println(date_added);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.date_added = LocalDateTime.parse(date_added, formatter);
-    }
-
-
-    public String toFileString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(user_id).append(":")
-                .append(first_name).append(":")
-                .append(last_name).append(":")
-                .append(email).append(":")
-                .append(username).append(":")
-                .append(password);
-        return builder.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AppUser appUser = (AppUser) o;
-        return Objects.equals(user_id, appUser.user_id) && Objects.equals(first_name, appUser.first_name) && Objects.equals(last_name, appUser.last_name) && Objects.equals(email, appUser.email) && Objects.equals(username, appUser.username) && Objects.equals(password, appUser.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(user_id, first_name, last_name, email, username, password);
-    }
-
-    @Override
-    public String toString() {
-        return "AppUser{" +
-                "user_id='" + user_id + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", date_added=" + date_added +
-                '}';
     }
 }
