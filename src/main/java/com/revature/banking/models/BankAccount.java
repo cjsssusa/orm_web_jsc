@@ -25,9 +25,9 @@ public class BankAccount {
     private Double balance;
     @ColumnInORM(Constraint = "NOT NULL", Size = 255, FOREIGN = "app_users(user_id)", Check = "(creator_id)::text <> ''::text")
     private String creator_id;
-    @NotIntoDabase
-    @ColumnInORM(Constraint = "NOT NULL", DefaultValue = "LOCALTIMESTAMP")
-    private LocalDateTime date_added;
+//    @NotIntoDabase
+//    @ColumnInORM(Constraint = "NOT NULL", DefaultValue = "LOCALTIMESTAMP")
+//    private LocalDateTime date_added;
 
     public BankAccount() {
     }
@@ -77,9 +77,10 @@ public class BankAccount {
         this.creator_id = creator_id;
     }
 
-    public LocalDateTime getDate_added() {
-        return date_added;
-    }
+//    public LocalDateTime getDate_added() {
+//        return date_added;
+//    }
+
 
     @Override
     public String toString() {
@@ -89,8 +90,7 @@ public class BankAccount {
                 ", account_number='" + account_number + '\'' +
                 ", account_type='" + account_type + '\'' +
                 ", balance=" + balance +
-                ", creator_id=" + creator_id +
-                ", date_added=" + date_added +
+                ", creator_id='" + creator_id + '\'' +
                 '}';
     }
 }

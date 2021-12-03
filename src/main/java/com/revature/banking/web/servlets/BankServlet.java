@@ -27,21 +27,22 @@ public class BankServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("beginning of doPost..... bank");
-
-        AppUser authUser = (AppUser) req.getSession().getAttribute("authUser");
-        if (authUser == null) {
-            System.out.println("User login first!");
-            resp.setStatus(400); // client error; BAD REQUEST
-            return;
-        }
-        System.out.println(authUser.toString());
-
         try {
+            System.out.println("beginning of doPost..... bank");
+
+            AppUser authUser = (AppUser) req.getSession().getAttribute("authUser");
+            if (authUser == null) {
+                System.out.println("User login first!");
+                resp.setStatus(400); // client error; BAD REQUEST
+                return;
+            }
+            System.out.println(authUser.toString());
             System.out.println("type = " + req.getParameter("type"));
+
             boolean wasRegistered = false;
             BankAccount bankAccount = mapper.readValue(req.getInputStream(), BankAccount.class);
-            System.out.println(bankAccount);;
+            System.out.println(bankAccount);
+
             if (req.getParameter("type").equals("create")) {
                 bankAccount.setCreator_id(authUser.getUser_id());
                 System.out.println(bankAccount.toString());

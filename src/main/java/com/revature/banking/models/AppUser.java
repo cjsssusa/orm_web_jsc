@@ -6,7 +6,6 @@ import com.revature.banking.orm.annotation.NotIntoDabase;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 /*
     POJO = Plain Ol' Java Object
@@ -47,9 +46,9 @@ public class AppUser {
     private String username;
     @ColumnInORM(Constraint = "NOT NULL", Size = 255, Check = "(password)::text <> ''::text")
     private String password;
-    @NotIntoDabase
-    @ColumnInORM(Constraint = "NOT NULL", DefaultValue = "LOCALTIMESTAMP")
-    private LocalDateTime date_added;
+//    @NotIntoDabase
+//    @ColumnInORM(Constraint = "NOT NULL", DefaultValue = "LOCALTIMESTAMP")
+//    private LocalDateTime date_added;
 
     public AppUser(String firstName, String lastName, String email, String username, String password) {
         this.first_name = firstName;
@@ -112,13 +111,13 @@ public class AppUser {
         this.password = password;
     }
 
-    public LocalDateTime getDate_added() {
-        return date_added;
-    }
-
-    public void setDate_added(String date_added) {
-        System.out.println(date_added);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        this.date_added = LocalDateTime.parse(date_added, formatter);
-    }
+//    public LocalDateTime getDate_added() {
+//        return date_added;
+//    }
+//
+//    public void setDate_added(String date_added) {
+//        System.out.println(date_added);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        this.date_added = LocalDateTime.parse(date_added, formatter);
+//    }
 }

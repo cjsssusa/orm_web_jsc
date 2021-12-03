@@ -32,7 +32,7 @@ public class UserService {
         whereOderBy.put("where", where);
 
         boolean usernameAvailable = true;
-        List<AppUser> appUserList = crudORM.readTable(newUser, whereOderBy, AppUser.class);
+        List<AppUser> appUserList = crudORM.readTable(newUser, whereOderBy,AppUser.class);
         if (appUserList != null) {
             for (AppUser appUser : appUserList) {
                 System.out.println(appUser);
@@ -48,7 +48,7 @@ public class UserService {
         whereOderBy.put("where", where);
 
         boolean emailAvailable = true;
-        appUserList = crudORM.readTable(newUser, whereOderBy, AppUser.class);
+        appUserList = crudORM.readTable(newUser, whereOderBy,AppUser.class);
         if (appUserList != null) {
             for (AppUser appUserORM : appUserList) {
                 System.out.println(appUserORM);
@@ -73,6 +73,18 @@ public class UserService {
         return true;
     }
 
+    public List<AppUser> readUsers() {
+
+        List<AppUser> appUserList = crudORM.readTable(new AppUser(), null,AppUser.class);
+        System.out.println("appUserList --- " + appUserList);
+
+        if (appUserList == null) {
+            throw new InvalidRequestException("");
+        }
+
+        return appUserList;
+    }
+
     public AppUser authenticateUser(String username, String password) {
 
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
@@ -90,7 +102,7 @@ public class UserService {
         whereOderBy.put("where", where);
 
         AppUser authenticatedUser = null;
-        List<AppUser> appUserList = crudORM.readTable(authUser, whereOderBy, AppUser.class);
+        List<AppUser> appUserList = crudORM.readTable(authUser, whereOderBy,AppUser.class);
         System.out.println("appUserList --- " + appUserList);
 
         if (appUserList != null) {

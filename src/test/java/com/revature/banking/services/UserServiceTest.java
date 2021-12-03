@@ -96,7 +96,7 @@ public class UserServiceTest {
         where.put("username", "valid");
         whereOderBy.put("where", where);
 
-        when(mockCrudORM.readTable(validUser, whereOderBy, AppUser.class)).thenReturn(null);
+        when(mockCrudORM.readTable(validUser, whereOderBy,AppUser.class)).thenReturn(null);
         when(mockCrudORM.insertTable(validUser)).thenReturn(validUser);
 
         // Act
@@ -119,7 +119,7 @@ public class UserServiceTest {
         where.put("username", "valid");
         whereOderBy.put("where", where);
 
-        when(mockCrudORM.readTable(InvalidUser, whereOderBy, AppUser.class)).thenReturn(null);
+        when(mockCrudORM.readTable(InvalidUser, whereOderBy,AppUser.class)).thenReturn(null);
         when(mockCrudORM.insertTable(InvalidUser)).thenReturn(InvalidUser);
         // Act
         try {
@@ -167,7 +167,7 @@ public class UserServiceTest {
         where.put("username", "valid");
         whereOderBy.put("where", where);
 
-        when(mockCrudORM.readTable(ValidUser, whereOderBy, AppUser.class)).thenReturn(null);
+        when(mockCrudORM.readTable(ValidUser, whereOderBy,AppUser.class)).thenReturn(null);
 
         // Act
         try {
