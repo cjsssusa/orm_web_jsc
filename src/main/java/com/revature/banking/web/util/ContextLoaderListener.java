@@ -28,6 +28,12 @@ public class ContextLoaderListener implements ServletContextListener {
         ObjectMapper objectMapper = new ObjectMapper();
 
         CrudORM crudORM = new CrudORM(this);
+        try {
+            crudORM.createAllOfTablesWithDataSourceORM(this);
+            System.out.println("Done createAllOfTablesWithDataSourceORM");
+        } catch (SQLException | URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         UserService userService = new UserService(crudORM);
 
@@ -41,13 +47,6 @@ public class ContextLoaderListener implements ServletContextListener {
         context.addServlet("UserServlet", userServlet).addMapping("/users/*");
         context.addServlet("AuthServlet", authServlet).addMapping("/auth");
         context.addServlet("BankServlet", bankServlet).addMapping("/bank");
-
-        try {
-            crudORM.createAllOfTablesWithDataSourceORM(this);
-            System.out.println("Done createAllOfTablesWithDataSourceORM");
-        } catch (SQLException | URISyntaxException e) {
-            e.printStackTrace();
-        }
 
         System.out.println("Application initialized!");
 //        logger.info("Application initialized!");

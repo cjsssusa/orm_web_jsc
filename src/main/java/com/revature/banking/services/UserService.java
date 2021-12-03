@@ -23,13 +23,6 @@ public class UserService {
 
     public boolean registerNewUser(AppUser newUser) {
 
-        try {
-            crudORM.createAllOfTablesWithDataSourceORM(this);
-            System.out.println("Done createAllOfTablesWithDataSourceORM");
-        } catch (SQLException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-
         if (!isUserValid(newUser)) {
             throw new InvalidRequestException("Invalid user data provided!");
         }
