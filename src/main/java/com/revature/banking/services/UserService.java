@@ -6,6 +6,8 @@ import com.revature.banking.exceptions.ResourcePersistenceException;
 import com.revature.banking.models.AppUser;
 import com.revature.banking.orm.utils.CrudORM;
 
+import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,13 @@ public class UserService {
     }
 
     public boolean registerNewUser(AppUser newUser) {
+
+        try {
+            crudORM.createAllOfTablesWithDataSourceORM(this);
+            System.out.println("Done createAllOfTablesWithDataSourceORM");
+        } catch (SQLException | URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         if (!isUserValid(newUser)) {
             throw new InvalidRequestException("Invalid user data provided!");
