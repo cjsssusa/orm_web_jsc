@@ -12,7 +12,7 @@ public class TestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().write("<h1>/test works -- Dario & JongSoo - v5 </h1>");
+        resp.getWriter().write("<h1>/test works -- Dario & JongSoo - v6 </h1>");
     }
 
 }
